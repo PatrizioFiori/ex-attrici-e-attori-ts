@@ -1,0 +1,32 @@
+const nazionalitaAccettate = [
+    "American",
+    "British",
+    "Australian",
+    "Israeli-American",
+    "South African",
+    "French",
+    "Indian",
+    "Israeli",
+    "Spanish",
+    "South Korean",
+    "Chinese",
+] as const;
+
+type Nazionalita = typeof nazionalitaAccettate[number];
+
+
+export type Person = {
+    readonly id: number,
+    readonly name: string,
+    birth_year: number,
+    death_year?: number,
+    biography: string,
+    img: string
+}
+
+export type Actres = Person & {
+    most_famouse_movies: [string, string, string],
+    awards: string,
+    nationality: Nazionalita
+
+}
