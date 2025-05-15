@@ -24,8 +24,8 @@ export type Person = {
     img: string
 }
 
-export type Actres = Person & {
-    most_famouse_movies: [string, string, string],
+export type Actress = Person & {
+    most_famous_movies: [string, string, string],
     awards: string,
     nationality: Nazionalita
 

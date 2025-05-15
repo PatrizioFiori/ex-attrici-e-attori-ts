@@ -1,35 +1,5 @@
-const nazionalitaAccettate = [
-  "American",
-  "British",
-  "Australian",
-  "Israeli-American",
-  "South African",
-  "French",
-  "Indian",
-  "Israeli",
-  "Spanish",
-  "South Korean",
-  "Chinese",
-] as const;
+import type { Actress, Person } from "./types.ts";
 
-type Nazionalita = typeof nazionalitaAccettate[number];
-
-
-type Person = {
-  readonly id: number,
-  readonly name: string,
-  birth_year: number,
-  death_year?: number,
-  biography: string,
-  img: string
-}
-
-type Actress = Person & {
-  most_famous_movies: [string, string, string],
-  awards: string,
-  nationality: Nazionalita
-
-}
 
 const mockActress: Actress = {
   id: 1,
