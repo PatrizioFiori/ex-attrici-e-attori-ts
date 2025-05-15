@@ -1,115 +1,96 @@
-# 🎬 TypeScript Actress/Actor API Project
+# 🎬 Project Milestones
 
-## 📌 Milestone 1: Type Alias `Person`
+## 📌 Milestone 1  
+Crea un type alias Person per rappresentare una persona generica.
 
-Crea un type alias `Person` per rappresentare una persona generica.
+Il tipo deve includere le seguenti proprietà:
 
-**Proprietà richieste:**
-
-- `id`: `number` – identificativo univoco, **readonly**
-- `name`: `string` – nome completo, **readonly**
-- `birth_year`: `number` – anno di nascita
-- `death_year`: `number` (opzionale) – anno di morte
-- `biography`: `string` – breve biografia
-- `image`: `string` – URL dell'immagine
-
----
-
-## 📌 Milestone 2: Type Alias `Actress`
-
-Crea un type alias `Actress` che **estende `Person`** aggiungendo:
-
-- `most_famous_movies`: `[string, string, string]` – una **tupla** di 3 film famosi
-- `awards`: `string` – premi ricevuti
-- `nationality`: una stringa tra i seguenti valori:
-  - `American`
-  - `British`
-  - `Australian`
-  - `Israeli-American`
-  - `South African`
-  - `French`
-  - `Indian`
-  - `Israeli`
-  - `Spanish`
-  - `South Korean`
-  - `Chinese`
+- id: numero identificativo, non modificabile  
+- name: nome completo, stringa non modificabile  
+- birth_year: anno di nascita, numero  
+- death_year: anno di morte, numero opzionale  
+- biography: breve biografia, stringa  
+- image: URL dell'immagine, stringa  
 
 ---
 
-## 📌 Milestone 3: Funzione `getActress`
+## 📌 Milestone 2  
+Crea un type alias Actress che oltre a tutte le proprietà di Person, aggiunge le seguenti proprietà:
 
-Crea una funzione `getActress(id: number): Promise<Actress | null>` che:
+- most_famous_movies: una tuple di 3 stringhe  
+- awards: una stringa  
+- nationality: una stringa tra un insieme definito di valori.  
 
-- Effettua una chiamata a  
-  `GET https://boolean-spec-frontend.vercel.app/freetestapi/actresses/:id`
-- Restituisce un oggetto `Actress` se esiste, oppure `null` se non trovato
-- Utilizza un **type guard** chiamato `isActress` per validare la struttura del dato ricevuto
-
----
-
-## 📌 Milestone 4: Funzione `getAllActresses`
-
-Crea una funzione `getAllActresses(): Promise<Actress[]>` che:
-
-- Effettua una chiamata a  
-  `GET https://boolean-spec-frontend.vercel.app/freetestapi/actresses`
-- Restituisce un array di oggetti `Actress` (può essere anche vuoto)
+Le nazionalità accettate sono:  
+American, British, Australian, Israeli-American, South African, French, Indian, Israeli, Spanish, South Korean, Chinese.  
 
 ---
 
-## 📌 Milestone 5: Funzione `getActresses`
+## 📌 Milestone 3  
+Crea una funzione getActress che, dato un id, effettua una chiamata a:
 
-Crea una funzione `getActresses(ids: number[]): Promise<(Actress | null)[]>` che:
+`GET https://boolean-spec-frontend.vercel.app/freetestapi/actresses/:id`  
 
-- Riceve un array di ID (`number[]`)
-- Per ogni ID usa `getActress()` per recuperare l'attrice corrispondente
-- Esegue tutte le richieste in **parallelo** usando `Promise.all`
-- Restituisce un array contenente `Actress` oppure `null`
+La funzione deve restituire l’oggetto Actress, se esiste, oppure null se non trovato.  
 
----
-
-## 🎯 BONUS 1: Create & Update Actress
-
-### `createActress(data: Omit<Actress, "id">): Actress`
-
-- Usa `Omit` per **escludere `id`** (che verrà generato casualmente)
-
-### `updateActress(id: number, data: Partial<Omit<Actress, "id" | "name">>): Actress`
-
-- Usa `Partial` per **rendere opzionali tutte le proprietà aggiornabili**
-- `id` e `name` **non devono essere modificabili**
+Utilizza un type guard chiamato isActress per assicurarti che la struttura del dato ricevuto sia corretta.  
 
 ---
 
-## 🎯 BONUS 2: Type Alias `Actor`
+## 📌 Milestone 4  
+Crea una funzione getAllActresses che chiama:
 
-Crea un tipo `Actor`, che estende `Person` con:
+`GET https://boolean-spec-frontend.vercel.app/freetestapi/actresses`  
 
-- `known_for`: `[string, string, string]` – una tupla di 3 film
-- `awards`: `string[]` – array di 1 o 2 premi
-- `nationality`: stessa lista di `Actress` **più**:
-  - `Scottish`
-  - `New Zealand`
-  - `Hong Kong`
-  - `German`
-  - `Canadian`
-  - `Irish`
-
-Implementa anche:
-
-- `getActor(id: number): Promise<Actor | null>`
-- `getAllActors(): Promise<Actor[]>`
-- `getActors(ids: number[]): Promise<(Actor | null)[]>`
-- `createActor(data: Omit<Actor, "id">): Actor`
-- `updateActor(id: number, data: Partial<Omit<Actor, "id" | "name">>): Actor`
+La funzione deve restituire un array di oggetti Actress.  
+Può essere anche un array vuoto.  
 
 ---
 
-## 🎯 BONUS 3: Funzione `createRandomCouple`
+## 📌 Milestone 5  
+Crea una funzione getActresses che riceve un array di numeri (gli id delle attrici).
 
-Crea una funzione `createRandomCouple(): Promise<[Actress, Actor]>` che:
+Per ogni id nell’array, usa la funzione getActress che hai creato nella Milestone 3 per recuperare l’attrice corrispondente.
 
-- Usa `getAllActresses()` e `getAllActors()`
-- Restituisce una **coppia casuale**:  
-  - Primo elemento: una `Actress` a caso  
-  - Secondo elemento: un `Actor` a caso
+L'obiettivo è ottenere una lista di risultati in parallelo, quindi dovrai usare Promise.all.
+
+La funzione deve restituire un array contenente elementi di tipo Actress oppure null (se l’attrice non è stata trovata).
+
+---
+
+## 🎯 BONUS 1  
+Crea le funzioni:
+
+- createActress  
+- updateActress  
+
+Utilizza gli Utility Types:
+
+- `Omit`: per creare un'attrice senza passare id, che verrà generato casualmente.  
+- `Partial`: per permettere l’aggiornamento di qualsiasi proprietà tranne id e name.  
+
+---
+
+## 🎯 BONUS 2  
+Crea un tipo Actor, che estende Person con le seguenti differenze rispetto ad Actress:
+
+- known_for: una tuple di 3 stringhe  
+- awards: array di una o due stringhe  
+- nationality: le stesse di Actress più:  
+  Scottish, New Zealand, Hong Kong, German, Canadian, Irish.  
+
+Implementa anche le versioni:
+
+- getActor  
+- getAllActors  
+- getActors  
+- createActor  
+- updateActor  
+
+---
+
+## 🎯 BONUS 3  
+Crea la funzione createRandomCouple che usa getAllActresses e getAllActors per restituire un’array che ha sempre due elementi:  
+
+- al primo posto una Actress casuale  
+- al secondo posto un Actor casuale  
