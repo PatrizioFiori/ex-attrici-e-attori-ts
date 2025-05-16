@@ -72,8 +72,6 @@ async function getActress(id: number): Promise<Actress | null> {
 
 }
 
-
-
 async function getAllActresses(): Promise<Actress[]> {
   let res = await fetch(`https://boolean-spec-frontend.vercel.app/freetestapi/actresses`); //L'api fornita dall'esercizio è offline  
   let dati: unknown;
@@ -91,9 +89,35 @@ async function getAllActresses(): Promise<Actress[]> {
   } else {
     return []
   }
-
-
 }
+
+
+async function getActresses(ids: number[]): Promise<(Actress | null)[]> {
+  try {
+    const promises = ids.map(id => getActress(id))
+    const actresses = await Promise.all(promises)
+    return actresses
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log("Errore durante il recupero delle attrici", error)
+    } else {
+      console.log("Errore sconosciuto", error)
+    }
+    return []
+
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 (async function () {
