@@ -1,18 +1,16 @@
-const nazionalitaAccettate = [
-    "American",
-    "British",
-    "Australian",
-    "Israeli-American",
-    "South African",
-    "French",
-    "Indian",
-    "Israeli",
-    "Spanish",
-    "South Korean",
-    "Chinese",
-] as const;
+type nazionalitaAccettate =
+    | "American"
+    | "British"
+    | "Australian"
+    | "Israeli-American"
+    | "South African"
+    | "French"
+    | "Indian"
+    | "Israeli"
+    | "Spanish"
+    | "South Korean"
+    | "Chinese"
 
-type Nazionalita = typeof nazionalitaAccettate[number];
 
 
 export type Person = {
@@ -27,6 +25,6 @@ export type Person = {
 export type Actress = Person & {
     most_famous_movies: [string, string, string],
     awards: string,
-    nationality: Nazionalita
+    nationality: nazionalitaAccettate
 
 }
