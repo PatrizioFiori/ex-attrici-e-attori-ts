@@ -64,10 +64,8 @@ async function getActress(id: number): Promise<Actress | null> {
     dati = await res.json()
   }
   if (isActress(dati)) {
-    console.log("verifica effettuata");
     return dati
   }
-  console.log("verifica fallita");
   return null
 
 }
@@ -96,6 +94,7 @@ async function getActresses(ids: number[]): Promise<(Actress | null)[]> {
   try {
     const promises = ids.map(id => getActress(id))
     const actresses = await Promise.all(promises)
+
     return actresses
   } catch (error) {
     if (error instanceof Error) {
@@ -111,20 +110,13 @@ async function getActresses(ids: number[]): Promise<(Actress | null)[]> {
 
 
 
-
-
-
-
-
-
-
-
-
 (async function () {
   const res = await getActress(0);
-  console.log(res);
+  console.log("es1", res);
   const result = await getAllActresses();
-  console.log(result);
+  console.log("es2", result);
+  const resultData = await getActresses([0, 1, 2]);
+  console.log("es3", resultData);
 
 })()
 
